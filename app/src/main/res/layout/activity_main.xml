@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#AAAAAA"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="票   種   選   擇"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+
+    <RelativeLayout
+        style="@style/RelativeLayout"
+        android:layout_marginTop="20dp">
+
+        <CheckBox
+            android:id="@+id/cbOA"
+            style="@style/CheckBox"
+            android:text="全票 : 350元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOA"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOB"
+            style="@style/CheckBox"
+            android:text="學生票 : 250元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOB"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOC"
+            style="@style/CheckBox"
+            android:text="優待票 : 175元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOC"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOD"
+            style="@style/CheckBox"
+            android:text="星光票 : 150元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOD"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOE"
+            style="@style/CheckBox"
+            android:text="三日票 : 650元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOE"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOF"
+            style="@style/CheckBox"
+            android:text="全期間票 : 2500元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOF"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOG"
+            style="@style/CheckBox"
+            android:text="團體票 : 230元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOG"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOH"
+            style="@style/CheckBox"
+            android:text="二日票 : 450元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOH"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <CheckBox
+            android:id="@+id/cbOJ"
+            style="@style/CheckBox"
+            android:text="學生團體票 : 175元" />
+
+        <LinearLayout style="@style/LinerLayout">
+
+            <EditText
+                android:id="@+id/etOJ"
+                style="@style/EditText" />
+
+            <TextView style="@style/TextView" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btNext"
+        android:layout_width="330dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/after_login_btn_selector"
+        android:text="下  一  步"
+        android:textColor="#ffffff"
+        android:textSize="60px" />
+
+</LinearLayout>

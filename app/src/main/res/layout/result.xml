@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background2"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#AAAAAA"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="列   印   確   認"
+        android:textColor="#ffffff"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:lineSpacingMultiplier="1.5"/>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <TextView
+            android:id="@+id/tvTotalPriceResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50dp"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/RelativeLayout">
+
+        <Button
+            android:id="@+id/btLast"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/after_login_btn_selector"
+            android:text="上  一  步"
+            android:textColor="#ffffff"
+            android:textSize="60px"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"/>
+
+        <Button
+            android:id="@+id/btNext"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/after_login_btn_selector"
+            android:text="列  印"
+            android:textColor="#ffffff"
+            android:textSize="60px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>
