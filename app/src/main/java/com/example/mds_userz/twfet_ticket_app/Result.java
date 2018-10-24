@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class Result extends Activity {
     private TextView tvResult, tvTotalPriceResult;
+    private Button btNext, btLast;
     private String result;
     private int totalPrice;
 
@@ -25,6 +28,23 @@ public class Result extends Activity {
 
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvTotalPriceResult = (TextView) findViewById(R.id.tvTotalPriceResult);
+        btNext = (Button) findViewById(R.id.btNext);
+        btLast = (Button) findViewById(R.id.btLast);
+
+        btNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        btLast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mydbHelper.deleteTicket();
+                Result.this.finish();
+            }
+        });
 
         result = "";
         Cursor cursor = mydbHelper.getTicket();
