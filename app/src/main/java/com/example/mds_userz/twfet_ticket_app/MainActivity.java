@@ -1,7 +1,11 @@
 package com.example.mds_userz.twfet_ticket_app;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -10,12 +14,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Activity {
+    private String payWay;
+    private RadioGroup radioGroup;
+    private RadioButton cashRBtn;
     private CheckBox cbOA, cbOB, cbOC, cbOD, cbOE, cbOF, cbOG, cbOH, cbOJ;
     private EditText etOA, etOB, etOC, etOD, etOE, etOF, etOG, etOH, etOJ;
     private Button btNext;
@@ -33,25 +42,30 @@ public class MainActivity extends Activity {
 
         mydbHelper = new MyDBHelper(this);
 
-        cbOA = (CheckBox) findViewById(R.id.cbOA);
-        cbOB = (CheckBox) findViewById(R.id.cbOB);
-        cbOC = (CheckBox) findViewById(R.id.cbOC);
-        cbOD = (CheckBox) findViewById(R.id.cbOD);
-        cbOE = (CheckBox) findViewById(R.id.cbOE);
-        cbOF = (CheckBox) findViewById(R.id.cbOF);
-        cbOG = (CheckBox) findViewById(R.id.cbOG);
-        cbOH = (CheckBox) findViewById(R.id.cbOH);
-        cbOJ = (CheckBox) findViewById(R.id.cbOJ);
-        etOA = (EditText) findViewById(R.id.etOA);
-        etOB = (EditText) findViewById(R.id.etOB);
-        etOC = (EditText) findViewById(R.id.etOC);
-        etOD = (EditText) findViewById(R.id.etOD);
-        etOE = (EditText) findViewById(R.id.etOE);
-        etOF = (EditText) findViewById(R.id.etOF);
-        etOG = (EditText) findViewById(R.id.etOG);
-        etOH = (EditText) findViewById(R.id.etOH);
-        etOJ = (EditText) findViewById(R.id.etOJ);
-        btNext = (Button) findViewById(R.id.btNext);
+        cbOA = findViewById(R.id.cbOA);
+        cbOB = findViewById(R.id.cbOB);
+        cbOC = findViewById(R.id.cbOC);
+        cbOD = findViewById(R.id.cbOD);
+        cbOE = findViewById(R.id.cbOE);
+        cbOF = findViewById(R.id.cbOF);
+        cbOG = findViewById(R.id.cbOG);
+        cbOH = findViewById(R.id.cbOH);
+        cbOJ = findViewById(R.id.cbOJ);
+        etOA = findViewById(R.id.etOA);
+        etOB = findViewById(R.id.etOB);
+        etOC = findViewById(R.id.etOC);
+        etOD = findViewById(R.id.etOD);
+        etOE = findViewById(R.id.etOE);
+        etOF = findViewById(R.id.etOF);
+        etOG = findViewById(R.id.etOG);
+        etOH = findViewById(R.id.etOH);
+        etOJ = findViewById(R.id.etOJ);
+        btNext = findViewById(R.id.btNext);
+        radioGroup = findViewById(R.id.InOutRG);
+        cashRBtn = (RadioButton) findViewById(R.id.cashRBtn);
+
+        cashRBtn.setChecked(true);
+        payWay="現金";
 
         allCheckBoxes.add(cbOA);
         allCheckBoxes.add(cbOB);
@@ -82,51 +96,71 @@ public class MainActivity extends Activity {
                 try {
                     for (CheckBox cb : allCheckBoxes) {
                         if (cb.isChecked()) {
+                            String TK_NAME = "";
+                            String TK_NAME_EN = "";
                             String TK_CODE = "";
                             int TK_PRICE = 0;
                             int TK_COUNT = 0;
                             switch (cb.getId()) {
                                 case R.id.cbOA:
+                                    TK_NAME = "全票";
+                                    TK_NAME_EN = "FULL TICKET";
                                     TK_CODE = "OA";
                                     TK_PRICE = 350;
                                     TK_COUNT = Integer.parseInt(etOA.getText().toString().trim());
                                     break;
                                 case R.id.cbOB:
+                                    TK_NAME = "學生票";
+                                    TK_NAME_EN = "STUDENT TICKET";
                                     TK_CODE = "OB";
                                     TK_PRICE = 250;
                                     TK_COUNT = Integer.parseInt(etOB.getText().toString().trim());
                                     break;
                                 case R.id.cbOC:
+                                    TK_NAME = "優待票";
+                                    TK_NAME_EN = "DISCOUNTED TICKET";
                                     TK_CODE = "OC";
                                     TK_PRICE = 175;
                                     TK_COUNT = Integer.parseInt(etOC.getText().toString().trim());
                                     break;
                                 case R.id.cbOD:
+                                    TK_NAME = "星光票";
+                                    TK_NAME_EN = "EVENING TICKET";
                                     TK_CODE = "OD";
                                     TK_PRICE = 150;
                                     TK_COUNT = Integer.parseInt(etOD.getText().toString().trim());
                                     break;
                                 case R.id.cbOE:
+                                    TK_NAME = "三日票";
+                                    TK_NAME_EN = "THREE-DAY PASS";
                                     TK_CODE = "OE";
                                     TK_PRICE = 650;
                                     TK_COUNT = Integer.parseInt(etOE.getText().toString().trim());
                                     break;
                                 case R.id.cbOF:
+                                    TK_NAME = "全期間票";
+                                    TK_NAME_EN = "FLORA EXPO PASS";
                                     TK_CODE = "OF";
                                     TK_PRICE = 2500;
                                     TK_COUNT = Integer.parseInt(etOF.getText().toString().trim());
                                     break;
                                 case R.id.cbOG:
+                                    TK_NAME = "團體票";
+                                    TK_NAME_EN = "GROUP TICKET";
                                     TK_CODE = "OG";
                                     TK_PRICE = 230;
                                     TK_COUNT = Integer.parseInt(etOG.getText().toString().trim());
                                     break;
                                 case R.id.cbOH:
+                                    TK_NAME = "二日票";
+                                    TK_NAME_EN = "TWO-DAY PASS";
                                     TK_CODE = "OH";
                                     TK_PRICE = 450;
                                     TK_COUNT = Integer.parseInt(etOH.getText().toString().trim());
                                     break;
                                 case R.id.cbOJ:
+                                    TK_NAME = "學校團體票";
+                                    TK_NAME_EN = "STUDENT GROUP TICKET";
                                     TK_CODE = "OJ";
                                     TK_PRICE = 175;
                                     TK_COUNT = Integer.parseInt(etOJ.getText().toString().trim());
@@ -138,7 +172,8 @@ public class MainActivity extends Activity {
                                 mydbHelper.deleteTicket();
                                 return;
                             }
-                            mydbHelper.InsertToTicket(TK_CODE, cb.getText().toString().trim().substring(0, cb.getText().toString().trim().indexOf('票') + 1), TK_PRICE, TK_COUNT);
+                            mydbHelper.InsertToTicket(TK_CODE, TK_NAME, TK_NAME_EN, TK_PRICE, TK_COUNT);
+                            //mydbHelper.InsertToTicket(TK_CODE, cb.getText().toString().trim().substring(0, cb.getText().toString().trim().indexOf('票') + 1), TK_PRICE, TK_COUNT);
                         }
                     }
                 } catch (Exception ex) {
@@ -164,9 +199,32 @@ public class MainActivity extends Activity {
 
                 Intent callSub = new Intent();
                 callSub.setClass(MainActivity.this, Result.class);
+                callSub.putExtra("PayWay", payWay);
                 startActivity(callSub);
             }
         });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.cashRBtn) {
+                    payWay = "現金";
+                } else {
+                    payWay = "信用卡";
+                }
+            }
+        });
+
+        //監聽藍芽狀態
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        registerReceiver(mReceiver, filter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mydbHelper.deleteTicket();
     }
 
     //打勾就可以輸入數量，沒打勾無法輸入
@@ -264,6 +322,18 @@ public class MainActivity extends Activity {
                         etOJ.setText("0");
                     }
                     break;
+            }
+        }
+    };
+
+    //監聽藍芽連接狀態的廣播
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                Result.connectedBluetoothDevices.clear();
+                Toast.makeText(MainActivity.this, "藍牙連線關閉", Toast.LENGTH_SHORT).show();
             }
         }
     };
